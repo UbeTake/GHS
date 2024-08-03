@@ -7,7 +7,7 @@ st.title("自然環境汚染")
 # st.markdown('# headline2')
 
 # ローカルの画像ファイルを読み込む
-image = Image.open("C:/Users/User/anaconda3/ube/GHS-pictogram/GHS-pictogram-Nature_polluting.png")
+image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
 
 # 画像を30x30ピクセルにリサイズ
 # resized_image = image.resize((30, 30))
