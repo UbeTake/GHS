@@ -5,3 +5,8 @@ numpy
 streamlit_folium
 tensorflow
 matplotlib
+ImageDataGenerator
+layers
+models
+os
+image
