@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
+picture = st.camera_input("Take a picture")
+
 # タイトルを表示
 st.title("自然環境汚染")
 # st.write('# headline1')
@@ -32,6 +34,7 @@ st.text('・飲み込んだ場合：ただちに医師に連絡すること。\n
 st.text('・眼に入った場合：水で数分間注意深く洗うこと。\nコンタクトレンズを使用していて容易に外せる場合は外すこと。\nその後も洗浄を続けること。\nただちに医師に連絡すること。')
 st.text('・皮膚等に付着した場合：ただちに汚染された衣類を全て脱ぐこと。\n皮膚を多量の水と石けんで洗うこと。\n皮膚刺激が生じた場合、医師の手当てを受けること。')
 
+st.subheader('■マップ')
 import streamlit as st
 
 # 緯度経度データ（10進数）
