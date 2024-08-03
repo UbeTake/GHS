@@ -4,8 +4,8 @@ from PIL import Image
 
 # タイトルを表示
 st.title("自然環境汚染")
-st.write('# headline1')
-st.markdown('# headline2')
+# st.write('# headline1')
+# st.markdown('# headline2')
 
 # ローカルの画像ファイルを読み込む
 image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
