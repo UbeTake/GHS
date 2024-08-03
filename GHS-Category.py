@@ -32,53 +32,14 @@ st.text('・飲み込んだ場合：ただちに医師に連絡すること。\n
 st.text('・眼に入った場合：水で数分間注意深く洗うこと。\nコンタクトレンズを使用していて容易に外せる場合は外すこと。\nその後も洗浄を続けること。\nただちに医師に連絡すること。')
 st.text('・皮膚等に付着した場合：ただちに汚染された衣類を全て脱ぐこと。\n皮膚を多量の水と石けんで洗うこと。\n皮膚刺激が生じた場合、医師の手当てを受けること。')
 
-def create_map_data():
-    # マップ表示するランダムデータを作成
-    data = {
-        'lat': np.random.randn(100) / 100 + 35.68,
-        'lon': np.random.randn(100) / 100 + 139.75,
-    }
-    # データをデータフレーム形式に変換
-    map_data = pd.DataFrame(data)
+import streamlit as st
 
-    # マップの表示
-    st.map(map_data)
+# 緯度経度データ（10進数）
+pref_list = [
+  {"longitude":130.741667, "latitude":32.789828}, # 熊本県
+  {"longitude":131.423855, "latitude":31.911090}, # 宮崎県
+  {"longitude":130.557981, "latitude":31.560148}, # 鹿児島県
+]
 
-from  streamlit_folium import st_folium
-import folium
+st.map(pref_list)
 
-# 地図の表示箇所とズームレベルを指定してマップデータを作成
-# attr（アトリビュート）は地図右下に表示する文字列。
-# デフォルトマップの場合は省略可能
-m = folium.Map(
-  location=[39.94610, -75.150282],
-  zoom_start=16,
-  attr='Folium map'
-)
-
-# マーカーを作成してデータを追記
-folium.Marker(
-    [39.949610, -75.150282],
-    popup="Liberty Bell",
-    tooltip="Liberty Bell"
-).add_to(m)
-
-# 地図を表示
-st_data = st_folium(m, width=725)
-
-# 地図を表示
-st_data = st_folium(m, width=725)
-
-# レスポンスの表示
-with st.expander('st_data'):
-    st_data
-
-# 単色地図を使用する場合の例
-# attr（アトリビュート）は自分で適当な物を決定する。
-# 指定したアトリビュートは右下に表示される。
-m = folium.Map(
-    tiles='https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
-    attr='都道府県庁所在地、人口、面積(2016年)',
-    location=[35.7619914613808, 139.62983024004825],
-    zoom_start=16
-)
