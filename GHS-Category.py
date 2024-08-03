@@ -43,3 +43,42 @@ def create_map_data():
 
     # マップの表示
     st.map(map_data)
+
+from  streamlit_folium import st_folium
+import folium
+
+# 地図の表示箇所とズームレベルを指定してマップデータを作成
+# attr（アトリビュート）は地図右下に表示する文字列。
+# デフォルトマップの場合は省略可能
+m = folium.Map(
+  location=[39.94610, -75.150282],
+  zoom_start=16,
+  attr='Folium map'
+)
+
+# マーカーを作成してデータを追記
+folium.Marker(
+    [39.949610, -75.150282],
+    popup="Liberty Bell",
+    tooltip="Liberty Bell"
+).add_to(m)
+
+# 地図を表示
+st_data = st_folium(m, width=725)
+
+# 地図を表示
+st_data = st_folium(m, width=725)
+
+# レスポンスの表示
+with st.expander('st_data'):
+    st_data
+
+# 単色地図を使用する場合の例
+# attr（アトリビュート）は自分で適当な物を決定する。
+# 指定したアトリビュートは右下に表示される。
+m = folium.Map(
+    tiles='https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+    attr='都道府県庁所在地、人口、面積(2016年)',
+    location=[35.7619914613808, 139.62983024004825],
+    zoom_start=16
+)

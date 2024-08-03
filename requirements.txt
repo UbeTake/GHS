@@ -2,3 +2,4 @@ streamlit
 Pillow==10.4.0
 pandas==2.2.2
 numpy
+streamlit_folium
