@@ -2,7 +2,14 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras import layers, models
+import matplotlib.pyplot as plt
+import os
+from tensorflow.keras.preprocessing import image
 
+import matplotlib.image as mpimg
 
 picture = st.camera_input("Take a picture")
 
@@ -17,28 +24,12 @@ classes = ['Corrosive',
            'Oxidizing',
            'Toxic']
 
-# トレーニング済みモデルを保存したファイル名
-model_filename = './my_model.h5'
-# モデルの読み込み
-model = tf.keras.models.load_model(model_filename)
+# トレーニング済みモデルの読み込み
+model = tf.keras.models.load_model('./my_model.h5')
 
 # 画像のパス
-# img_path = '/content/drive/MyDrive/Colab Notebooks/GHS/sample.jpg'
+#img_path = './sample.jpg'
 img_path = picture
-
-# 必要なライブラリをインポートします
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-# 画像を表示する関数を定義します
-def show(image_path):
-  img = mpimg.imread(image_path)
-  plt.imshow(img)
-  plt.axis('off')  # 軸を非表示にする
-  plt.show()
-
-# 画像を表示します
-show(img_path)
 
 # 画像の前処理
 img = image.load_img(img_path, target_size=(150, 150))
@@ -54,26 +45,41 @@ predicted_label = classes[predicted_class]
 # 結果の表示
 print(f'This image is classified as: {predicted_label}')
 
-
-
-
+# 条件分岐
+result_label = ""
+if predicted_label == "Corrosive":
+    result_label = "腐食性"
+elif predicted_label == "Explosive":
+    result_label = "爆発物"
+elif predicted_label == "Flammable":
+    result_label = "可燃性"
+elif predicted_label == "Gases_under_pressure":
+    result_label = "圧力下のガス"
+elif predicted_label == "Harmful":
+    result_label = "有害"
+elif predicted_label == "Hazardous_to_health":
+    result_label = "健康に有害"
+elif predicted_label == "Nature_polluting":
+    result_label = "自然環境汚染"
+elif predicted_label == "Oxidizing":
+    result_label = "酸化性"
+elif predicted_label == "Toxic":
+    result_label = "有毒"
+else:
+    result_label = ""
 
 # タイトルを表示
-st.title("自然環境汚染")
-# st.write('# headline1')
-# st.markdown('# headline2')
+st.title(result_label)
+st.text(predicted_label)
 
 # ローカルの画像ファイルを読み込む
-image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
+#image = Image.open(img_path)
+#image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
 
-# 画像を30x30ピクセルにリサイズ
-# resized_image = image.resize((30, 30))
-# 画像を表示
-# st.image(resized_image, caption="自然環境汚染", use_column_width=False)
-
-# 高解像度のまま画像を表示
-# st.image(image, caption="自然環境汚染", width=150)
-st.image(image, width=150)
+# 画像の表示
+#st.image(image, width=150)
+#st.image(img_path, width=150)
+st.image(picture, width=150)
 
 st.subheader('■リスク情報')
 st.text('・水生生物に非常に強い毒性')
