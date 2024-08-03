@@ -1,12 +1,8 @@
 streamlit
-Pillow==10.4.0
-pandas==2.2.2
+Pillow
+pandas
 numpy
 streamlit_folium
 tensorflow
 matplotlib
-ImageDataGenerator
-layers
-models
-os
-image
+
