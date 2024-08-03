@@ -36,10 +36,9 @@ import streamlit as st
 
 # 緯度経度データ（10進数）
 pref_list = [
-  {"longitude":130.741667, "latitude":32.789828}, # 熊本県
-  {"longitude":131.423855, "latitude":31.911090}, # 宮崎県
-  {"longitude":130.557981, "latitude":31.560148}, # 鹿児島県
+  {"longitude":35.689521, "latitude":139.691704}, # 東京都
+  {"longitude":35.447753, "latitude":139.642514}, # 神奈川県
+  {"longitude":35.605058, "latitude":140.123308}, # 千葉県
+  {"longitude":35.857428, "latitude":139.648933}, # 埼玉県
 ]
-
 st.map(pref_list)
-
