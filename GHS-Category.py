@@ -2,13 +2,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
-import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras import layers, models
-import matplotlib.pyplot as plt
-import numpy as np
-import os
-from tensorflow.keras.preprocessing import image
+
 
 picture = st.camera_input("Take a picture")
 
