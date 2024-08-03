@@ -2,7 +2,67 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras import layers, models
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+from tensorflow.keras.preprocessing import image
+
 picture = st.camera_input("Take a picture")
+
+# 画像のクラス名
+classes = ['Corrosive',
+           'Explosive',
+           'Flammable',
+           'Gases_under_pressure',
+           'Harmful',
+           'Hazardous_to_health',
+           'Nature_polluting',
+           'Oxidizing',
+           'Toxic']
+
+# トレーニング済みモデルを保存したファイル名
+model_filename = './my_model.h5'
+# モデルの読み込み
+model = tf.keras.models.load_model(model_filename)
+
+# 画像のパス
+# img_path = '/content/drive/MyDrive/Colab Notebooks/GHS/sample.jpg'
+img_path = picture
+
+# 必要なライブラリをインポートします
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+# 画像を表示する関数を定義します
+def show(image_path):
+  img = mpimg.imread(image_path)
+  plt.imshow(img)
+  plt.axis('off')  # 軸を非表示にする
+  plt.show()
+
+# 画像を表示します
+show(img_path)
+
+# 画像の前処理
+img = image.load_img(img_path, target_size=(150, 150))
+x = image.img_to_array(img)
+x = np.expand_dims(x, axis=0)
+x = x / 255.0
+
+# 画像の分類
+predictions = model.predict(x)
+predicted_class = np.argmax(predictions[0])
+predicted_label = classes[predicted_class]
+
+# 結果の表示
+print(f'This image is classified as: {predicted_label}')
+
+
+
+
 
 # タイトルを表示
 st.title("自然環境汚染")
