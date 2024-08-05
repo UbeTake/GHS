@@ -2,10 +2,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
-try:
-    import tensorflow as tf
-except ImportError as e:
-    print("Error importing TensorFlow: ", e)
+import tensorflow as tf
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import layers, models
