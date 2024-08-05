@@ -12,7 +12,6 @@ from tensorflow.keras.preprocessing import image
 
 import matplotlib.image as mpimg
 
-
 picture = st.camera_input("Take a picture")
 
 # 画像のクラス名
@@ -31,8 +30,6 @@ lisk = ""
 safety = ""
 first_aid = ""
 
-
-
 if picture is not None:
     # 画像のパス
     #img_path = './sample.jpg'
@@ -45,10 +42,25 @@ if picture is not None:
     x = x / 255.0
 
     # トレーニング済みモデルの読み込み
-    model = tf.keras.models.load_model('./my_model.h5')
+    # model = tf.keras.models.load_model('./my_model.h5')
+
+    @st.cache_data
+    def load_model():
+        return tf.keras.models.load_model('./my_model.h5')
+
+    model = load_model()
+
+    @st.cache_data
+    def predict(model, x):
+        return model.predict(x)
+
+    predictions = predict(model, x)
+
+
+
 
     # 画像の分類
-    predictions = model.predict(x)
+    #predictions = model.predict(x)
     predicted_class = np.argmax(predictions[0])
     predicted_label = classes[predicted_class]
 
