@@ -1,0 +1,8 @@
+streamlit==1.37.0
+streamlit_folium==0.22.0
+pillow==10.4.0
+pandas==2.2.2
+numpy==1.26.4
+tensorflow==2.17.0
+keras==3.4.1
+matplotlib==3.9.1
