@@ -11,9 +11,27 @@ import os
 from tensorflow.keras.preprocessing import image
 
 import matplotlib.image as mpimg
+import time
 
 # トレーニング済みモデルの読み込み
-model = tf.keras.models.load_model('my_model.h5')
+# model = tf.keras.models.load_model('./my_model.h5')
+
+# Streamlit のキャッシュ機能を使用してモデルをロード
+@st.cache_data
+def load_model():
+    with st.spinner('モデルを読み込んでいます...'):
+        time.sleep(10)  # デモ用の遅延。実際にはモデルの読み込み時間を想定
+        model = tf.keras.models.load_model('./my_model.h5')
+    return model
+
+# モデルをロード
+model = load_model()
+
+# モデルが正常に読み込まれたことを通知
+st.success('モデルが正常に読み込まれました！')
+
+
+
 
 picture = st.camera_input("Take a picture")
 
