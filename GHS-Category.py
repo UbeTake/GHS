@@ -64,12 +64,17 @@ if picture is not None:
 
 
 
-
+    with st.spinner('予測中...'):
+        try:
+            predictions = model.predict(x)
+            st.write(predictions)
+        except Exception as e:
+            st.error(f"予測中にエラーが発生しました: {e}")
 
 
 
     # 画像の分類
-    predictions = model.predict(x)
+    #predictions = model.predict(x)
     predicted_class = np.argmax(predictions[0])
     predicted_label = classes[predicted_class]
 
