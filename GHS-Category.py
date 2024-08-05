@@ -31,8 +31,7 @@ lisk = ""
 safety = ""
 first_aid = ""
 
-# トレーニング済みモデルの読み込み
-model = tf.keras.models.load_model('./my_model.h5')
+
 
 if picture is not None:
     # 画像のパス
@@ -44,6 +43,9 @@ if picture is not None:
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = x / 255.0
+
+    # トレーニング済みモデルの読み込み
+    model = tf.keras.models.load_model('./my_model.h5')
 
     # 画像の分類
     predictions = model.predict(x)
