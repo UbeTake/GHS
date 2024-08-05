@@ -13,7 +13,7 @@ from tensorflow.keras.preprocessing import image
 import matplotlib.image as mpimg
 
 # トレーニング済みモデルの読み込み
-model = tf.keras.models.load_model('./my_model.h5')
+model = tf.keras.models.load_model('my_model.h5')
 
 picture = st.camera_input("Take a picture")
 
