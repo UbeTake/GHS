@@ -6,9 +6,4 @@ streamlit_folium
 tensorflow
 keras
 matplotlib
-Image
-PIL
-ImageDataGenerator
-layers
-models
-os
+
