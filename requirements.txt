@@ -3,7 +3,6 @@ Pillow
 pandas
 numpy
 streamlit_folium
-tensorflow
+tensorflow == 2.17.0
 keras
 matplotlib
-
