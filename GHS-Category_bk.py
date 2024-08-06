@@ -1,7 +1,30 @@
-import numpy as np
 import streamlit as st
-import tensorflow as tf
+import numpy as np
 from PIL import Image
+
+import tensorflow as tf
+
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras import layers, models
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import os
+import time
+
+# Streamlit のキャッシュ機能を使用してモデルをロード
+@st.cache_data
+def load_model():
+    with st.spinner('モデルを読み込んでいます...'):
+        time.sleep(15)
+        # トレーニング済みモデルの読み込み
+        model = tf.keras.models.load_model('./my_model.h5')
+    return model
+
+# モデルをロード
+model = load_model()
+# モデルが正常に読み込まれたことを通知
+st.success('モデルが正常に読み込まれました！')
 
 # カメラ
 picture = st.camera_input("Take a picture")
@@ -23,24 +46,35 @@ safety = ""
 first_aid = ""
 
 if picture is not None:
-    # 画像の読み込みと前処理
+    # 画像の前処理
+    # img = image.load_img(picture, target_size=(150, 150))
+    # x = image.img_to_array(img)
+    # x = np.expand_dims(x, axis=0)
+    # x = x / 255.0
+
+    # 画像の前処理
     img = Image.open(picture)
     img = img.resize((150, 150))
-    x = np.array(img)
+    x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = x / 255.0
 
-    # モデルのロード
-    model = tf.keras.models.load_model('./my_model.h5')
+
+    # with st.spinner('予測中...'):
+    #     try:
+    #         predictions = model.predict(x)
+    #         time.sleep(60)
+    #         st.write(predictions)
+    #     except Exception as e:
+    #         st.error(f"予測中にエラーが発生しました: {e}")
+
+
 
     # 画像の分類
     predictions = model.predict(x)
     predicted_class = np.argmax(predictions[0])
     predicted_label = classes[predicted_class]
-    # st.write(f'Predicted class: {predicted_class}')
-    # st.write(f'Predicted label: {predicted_label}')
-    # 画像の表示
-    # st.image(picture, width=150)
+
     # 結果の表示
     print(f'This image is classified as: {predicted_label}')
 
@@ -90,6 +124,9 @@ if picture is not None:
     # タイトルの表示
     st.title(result_label)
     st.text(predicted_label)
+
+    # ローカルの画像ファイルを読み込む
+    #image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
 
     # 画像の表示
     st.image(picture, width=150)
