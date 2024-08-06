@@ -5,6 +5,7 @@ from PIL import Image
 
 # カメラ
 picture = st.camera_input("Take a picture")
+img_path = "./sample.jpg"
 
 # 画像のクラス名
 classes = ['Corrosive',
@@ -17,9 +18,9 @@ classes = ['Corrosive',
            'Oxidizing',
            'Toxic']
 
-if picture is not None:
+if img_path is not None:
     # 画像の読み込みと前処理
-    img = Image.open(picture)
+    img = Image.open(img_path)
     img = img.resize((150, 150))
     x = np.array(img)
     x = np.expand_dims(x, axis=0)
@@ -35,6 +36,6 @@ if picture is not None:
     st.write(f'Predicted class: {predicted_class}')
     st.write(f'Predicted label: {predicted_label}')
     # 画像の表示
-    st.image(picture, width=150)
+    st.image(img_path, width=150)
     # 結果の表示
     print(f'This image is classified as: {predicted_label}')
