@@ -54,6 +54,8 @@ if picture is not None:
         # モデルのロード
         # model = tf.keras.models.load_model('./my_model.h5')
         st.write("モデル:", model)
+
+        st.write("分類処理中...")
         # 画像の分類
         predictions = model.predict(x)
         predicted_class = np.argmax(predictions[0])
@@ -61,7 +63,6 @@ if picture is not None:
     except BrokenPipeError:
         st.write("BrokenPipeError: パイプが壊れちゃった。")
 
-    st.write("モデル:", model)
     st.write("分類結果:", predictions)
     st.write(f'Predicted class: {predicted_class}')
     st.write(f'Predicted label: {predicted_label}')
