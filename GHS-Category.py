@@ -59,13 +59,13 @@ if picture is not None:
         @st.cache_data
         def predictions_main():
             with st.spinner('分類しています...'):
-                time.sleep(15)
+                time.sleep(60)
                 # 画像の分類
                 predictions = model.predict(x)
             return predictions
-        # モデルをロード
+        # 画像を分類
         predictions = predictions_main()
-        # モデルが正常に読み込まれたことを通知
+        # 分類が正常に完了したことを通知
         st.success('分類が正常に完了しました！')
 
         # 画像の分類
