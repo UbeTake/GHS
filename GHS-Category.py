@@ -44,7 +44,7 @@ if picture is not None:
         predicted_class = np.argmax(predictions[0])
         predicted_label = classes[predicted_class]
     except BrokenPipeError:
-        print("BrokenPipeError: パイプが壊れちゃった。")
+        st.write("BrokenPipeError: パイプが壊れちゃった。")
 
     st.write("分類結果:", predictions)
     st.write(f'Predicted class: {predicted_class}')
