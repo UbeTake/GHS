@@ -38,13 +38,14 @@ if picture is not None:
     try:
         # 画像の分類
         predictions = model.predict(x)
+        st.write("分類結果:", predictions)
 
     except BrokenPipeError:
         print("BrokenPipeError: パイプが壊れちゃった。")
-
+    predictions = ""
     predicted_class = np.argmax(predictions[0])
     predicted_label = classes[predicted_class]
-    st.write("分類結果:", predictions)
+    # st.write("分類結果:", predictions)
     st.write(f'Predicted class: {predicted_class}')
     st.write(f'Predicted label: {predicted_label}')
 
