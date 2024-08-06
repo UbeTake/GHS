@@ -17,11 +17,6 @@ classes = ['Corrosive',
            'Oxidizing',
            'Toxic']
 
-result_label = ""
-lisk = ""
-safety = ""
-first_aid = ""
-
 if picture is not None:
     # 画像の読み込みと前処理
     img = Image.open(picture)
@@ -43,4 +38,3 @@ if picture is not None:
     st.image(picture, width=150)
     # 結果の表示
     print(f'This image is classified as: {predicted_label}')
-
