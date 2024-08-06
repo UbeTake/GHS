@@ -54,10 +54,22 @@ if picture is not None:
         # モデルのロード
         # model = tf.keras.models.load_model('./my_model.h5')
         st.write("モデル:", model)
-        # おまけ
-        st.write("分類処理中...")
+
+        # Streamlit のキャッシュ機能を使用してモデルをロード
+        @st.cache_data
+        def predictions_main():
+            with st.spinner('分類しています...'):
+                time.sleep(15)
+                # 画像の分類
+                predictions = model.predict(x)
+            return predictions
+        # モデルをロード
+        predictions = predictions_main()
+        # モデルが正常に読み込まれたことを通知
+        st.success('分類が正常に完了しました！')
+
         # 画像の分類
-        predictions = model.predict(x)
+        # predictions = model.predict(x)
         predicted_class = np.argmax(predictions[0])
         predicted_label = classes[predicted_class]
     except BrokenPipeError:
