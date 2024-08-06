@@ -36,9 +36,23 @@ if picture is not None:
     predicted_class = 7
     predicted_label = "test"
     try:
-        # モデルのロード
-        model = tf.keras.models.load_model('./my_model.h5')
+        # Streamlit のキャッシュ機能を使用してモデルをロード
+        @st.cache_data
+        def load_model():
+            with st.spinner('モデルを読み込んでいます...'):
+                time.sleep(15)
+                # トレーニング済みモデルの読み込み
+                model = tf.keras.models.load_model('./my_model.h5')
+            return model
 
+        # モデルをロード
+        model = load_model()
+        # モデルが正常に読み込まれたことを通知
+        st.success('モデルが正常に読み込まれました！')
+
+        # モデルのロード
+        # model = tf.keras.models.load_model('./my_model.h5')
+        st.write("モデル:", model)
         # 画像の分類
         predictions = model.predict(x)
         predicted_class = np.argmax(predictions[0])
@@ -46,6 +60,7 @@ if picture is not None:
     except BrokenPipeError:
         st.write("BrokenPipeError: パイプが壊れちゃった。")
 
+    st.write("モデル:", model)
     st.write("分類結果:", predictions)
     st.write(f'Predicted class: {predicted_class}')
     st.write(f'Predicted label: {predicted_label}')
