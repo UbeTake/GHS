@@ -3,11 +3,6 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 
-# 標準出力のエラー処理を抑制
-# ないとBrokenPipeError: [Errno 32]がでる
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE, SIG_DFL)
-
 # カメラ
 picture = st.camera_input("Take a picture")
 

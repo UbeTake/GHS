@@ -1,0 +1,4 @@
+[server]
+maxUploadSize = 200
+serverTimeout = 300
+server.socket_timeout = 600
