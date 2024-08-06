@@ -30,12 +30,12 @@ if img_path is not None:
     model = tf.keras.models.load_model('./my_model.h5')
 
     # 画像の分類
-    predictions = model.predict(x)
-    predicted_class = np.argmax(predictions[0])
-    predicted_label = classes[predicted_class]
-    st.write(f'Predicted class: {predicted_class}')
-    st.write(f'Predicted label: {predicted_label}')
+    # predictions = model.predict(x)
+    # predicted_class = np.argmax(predictions[0])
+    # predicted_label = classes[predicted_class]
+    # st.write(f'Predicted class: {predicted_class}')
+    # st.write(f'Predicted label: {predicted_label}')
     # 画像の表示
     st.image(img_path, width=150)
     # 結果の表示
-    print(f'This image is classified as: {predicted_label}')
+    # print(f'This image is classified as: {predicted_label}')
