@@ -32,7 +32,7 @@ if picture is not None:
 
     # モデルのロード
     # model = tf.keras.models.load_model('./my_model.h5')
-    model = tf.keras.models.load_model('https://github.com/UbeTake/GHS/blob/main/my_model.h5')
+    model = tf.keras.models.load_model('/absolute/path/to/my_model.h5')
 
     # 画像の分類
     predictions = model.predict(x)
