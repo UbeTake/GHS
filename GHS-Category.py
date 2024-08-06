@@ -54,7 +54,7 @@ if picture is not None:
         # モデルのロード
         # model = tf.keras.models.load_model('./my_model.h5')
         st.write("モデル:", model)
-
+        # おまけ
         st.write("分類処理中...")
         # 画像の分類
         predictions = model.predict(x)
