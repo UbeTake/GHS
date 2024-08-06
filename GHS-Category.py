@@ -59,7 +59,7 @@ if picture is not None:
         @st.cache_data
         def predictions_main():
             with st.spinner('分類しています...'):
-                time.sleep(60)
+                time.sleep(300)
                 # 画像の分類
                 predictions = model.predict(x)
             return predictions
