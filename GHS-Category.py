@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 # from tensorflow.keras.preprocessing.image import load_img
+import time
 
 # カメラ
 picture = st.camera_input("Take a picture")
