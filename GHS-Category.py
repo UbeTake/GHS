@@ -5,34 +5,28 @@ from PIL import Image
 import tensorflow as tf
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing import image
 from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
-import os
-from tensorflow.keras.preprocessing import image
-
 import matplotlib.image as mpimg
+import os
 import time
-
-# トレーニング済みモデルの読み込み
-# model = tf.keras.models.load_model('./my_model.h5')
 
 # Streamlit のキャッシュ機能を使用してモデルをロード
 @st.cache_data
 def load_model():
     with st.spinner('モデルを読み込んでいます...'):
-        time.sleep(15)  # デモ用の遅延。実際にはモデルの読み込み時間を想定
+        time.sleep(15)
+        # トレーニング済みモデルの読み込み
         model = tf.keras.models.load_model('./my_model.h5')
     return model
 
 # モデルをロード
 model = load_model()
-
 # モデルが正常に読み込まれたことを通知
 st.success('モデルが正常に読み込まれました！')
 
-
-
-
+# カメラ
 picture = st.camera_input("Take a picture")
 
 # 画像のクラス名
@@ -52,16 +46,18 @@ safety = ""
 first_aid = ""
 
 if picture is not None:
-    # 画像のパス
-    #img_path = './sample.jpg'
-    img_path = picture
+    # 画像の前処理
+    # img = image.load_img(picture, target_size=(150, 150))
+    # x = image.img_to_array(img)
+    # x = np.expand_dims(x, axis=0)
+    # x = x / 255.0
 
     # 画像の前処理
-    img = image.load_img(img_path, target_size=(150, 150))
+    img = Image.open(picture)
+    img = img.resize((150, 150))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = x / 255.0
-
 
 
     # with st.spinner('予測中...'):
@@ -130,12 +126,9 @@ if picture is not None:
     st.text(predicted_label)
 
     # ローカルの画像ファイルを読み込む
-    #image = Image.open(img_path)
     #image = Image.open("./GHS-pictogram/GHS-pictogram-Nature_polluting.png")
 
     # 画像の表示
-    #st.image(image, width=150)
-    #st.image(img_path, width=150)
     st.image(picture, width=150)
 
     first_aid = "[火災の場合]\n・適切な消火剤又は水を用いて消火すること。\n[飲み込んだ場合]\n・ただちに医師に連絡すること。\n・口をすすぐこと。\n[眼に入った場合]\n・水で数分間注意深く洗うこと。\n・コンタクトレンズを使用していて容易に外せる場合は外すこと。\n・その後も洗浄を続けること。\n・ただちに医師に連絡すること。\n[皮膚等に付着した場合]\n・ただちに汚染された衣類を全て脱ぐこと。\n・皮膚を多量の水と石けんで洗うこと。\n・皮膚刺激が生じた場合、医師の手当てを受けること。"
