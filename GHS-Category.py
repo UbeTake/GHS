@@ -20,7 +20,7 @@ import time
 @st.cache_data
 def load_model():
     with st.spinner('モデルを読み込んでいます...'):
-        time.sleep(10)  # デモ用の遅延。実際にはモデルの読み込み時間を想定
+        time.sleep(15)  # デモ用の遅延。実際にはモデルの読み込み時間を想定
         model = tf.keras.models.load_model('./my_model.h5')
     return model
 
@@ -64,18 +64,18 @@ if picture is not None:
 
 
 
-    with st.spinner('予測中...'):
-        try:
-            predictions = model.predict(x)
-            time.sleep(60)
-            st.write(predictions)
-        except Exception as e:
-            st.error(f"予測中にエラーが発生しました: {e}")
+    # with st.spinner('予測中...'):
+    #     try:
+    #         predictions = model.predict(x)
+    #         time.sleep(60)
+    #         st.write(predictions)
+    #     except Exception as e:
+    #         st.error(f"予測中にエラーが発生しました: {e}")
 
 
 
     # 画像の分類
-    #predictions = model.predict(x)
+    predictions = model.predict(x)
     predicted_class = np.argmax(predictions[0])
     predicted_label = classes[predicted_class]
 
