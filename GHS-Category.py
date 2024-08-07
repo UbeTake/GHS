@@ -1,3 +1,6 @@
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE,SIG_DFL)
+
 import streamlit as st
 import numpy as np
 import tensorflow as tf
