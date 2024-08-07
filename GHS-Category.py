@@ -220,7 +220,7 @@ def get_location():
 
 
 # タイトル
-st.write("現在の位置情報を取得")
+st.title("現在の位置情報を取得")
 
 # JavaScriptを用いてブラウザの位置情報を取得
 geolocation = st_js.st_javascript(
@@ -244,5 +244,7 @@ else:
 
 
 
-
-
+pref_list_1 = [
+  {"latitude":35.2786737, "longitude":139.670043}, # 横須賀中央駅
+]
+st.map(pref_list_1)
